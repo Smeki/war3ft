@@ -6,7 +6,7 @@
 
 new const szTables[TOTAL_TABLES][] =
 		{
-				"CREATE TABLE IF NOT EXISTS `wc3_player` ( `player_id` int(8) unsigned NOT NULL auto_increment, `player_steamid` varchar(25) NOT NULL default '', `player_ip` varchar(20) NOT NULL default '', `player_name` varchar(35) NOT NULL default '', `time` timestamp NOT NULL, PRIMARY KEY  (`player_id`), KEY `player_name` (`player_name`), KEY `player_ip` (`player_ip`), KEY `player_steamid` (`player_steamid`) );",
+				"CREATE TABLE IF NOT EXISTS `wc3_player` ( `player_id` int(8) unsigned NOT NULL auto_increment, `player_steamid` varchar(25) NOT NULL default '', `player_ip` varchar(20) NOT NULL default '', `player_name` varchar(35) NOT NULL default '', `time` timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6), PRIMARY KEY  (`player_id`), KEY `player_name` (`player_name`), KEY `player_ip` (`player_ip`), KEY `player_steamid` (`player_steamid`) );",
 				"CREATE TABLE IF NOT EXISTS `wc3_player_extra` ( `player_id` INT( 8 ) UNSIGNED NOT NULL , `player_steamid` VARCHAR( 25 ) NOT NULL , `player_ip` VARCHAR( 20 ) NOT NULL , `player_name` VARCHAR( 35 ) NOT NULL , PRIMARY KEY ( `player_id` )) ;",
 				"CREATE TABLE IF NOT EXISTS `wc3_player_race` ( `player_id` int(8) unsigned NOT NULL default '0', `race_id` tinyint(4) unsigned NOT NULL default '0', `race_xp` int(8) default NULL, PRIMARY KEY  (`player_id`,`race_id`) );",
 				"CREATE TABLE IF NOT EXISTS `wc3_player_skill` ( `player_id` int(8) unsigned NOT NULL default '0', `skill_id` tinyint(4) unsigned NOT NULL default '0', `skill_level` tinyint(4) unsigned NOT NULL default '0', PRIMARY KEY  (`player_id`,`skill_id`) );",
