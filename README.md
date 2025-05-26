@@ -1,6 +1,6 @@
-# War3FT (Warcraft 3: Frozen Throne) Plugin for Counter-Strike 1.6
+# War3FT (Warcraft 3: Frozen Throne) Plugin for Counter-Strike 1.6, Day of Defeat and Condition Zero
 
-This is a Counter-Strike plugin that implements Warcraft 3: Frozen Throne RPG elements into the game. Players can level up, choose races, use skills, and gain experience during gameplay.
+This is an AMX MOD X plugin that implements Warcraft 3: Frozen Throne RPG elements into the game. Players can level up, choose races, use skills, and gain experience during gameplay.
 
 ## Features
 
