@@ -549,7 +549,7 @@ MYSQLX_UpdateWebTable()
 
 
 	// Check to see if we even need an update!
-	formatex ( szQuery, 255, "SELECT `config_value` FROM `wc3_config` WHERE `config_id` = 'version' AND `config_value` = '%s';", WC3FT_VERSION );
+	formatex ( szQuery, 255, "SELECT `config_value` FROM `wc3_config` WHERE `config_id` = 'version' AND `config_value` = '%s';", WC3VERSION );
 	query = SQL_PrepareQuery( g_DBConn, szQuery );
 
 	if ( !SQL_Execute( query ) )
@@ -574,7 +574,7 @@ MYSQLX_UpdateWebTable()
 		SQL_FreeHandle( query );
 
 		// Insert current version!
-		formatex ( szQuery, 1023, "REPLACE INTO `wc3_config` ( `config_id` , `config_value` ) VALUES ( 'version', '%s' );", WC3FT_VERSION );
+		formatex ( szQuery, 1023, "REPLACE INTO `wc3_config` ( `config_id` , `config_value` ) VALUES ( 'version', '%s' );", WC3VERSION );
 		query = SQL_PrepareQuery( g_DBConn, szQuery );
 		
 		if ( !SQL_Execute( query ) )

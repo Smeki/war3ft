@@ -275,7 +275,7 @@ CMD_Handle( id, szCmd[], bool:bThroughSay )
 	// Print full version info
 	if ( CMD_Equal( id, szCmd, "war3_version" ) )
 	{
-		console_print( id, "War3FT Version: %s (Build %s)", WC3FT_VERSION, WC3FT_V_BUILD );
+		console_print( id, "War3FT Version: %s", WC3VERSION );
 	}
 	
 	// Change the user's race
