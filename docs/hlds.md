@@ -33,6 +33,14 @@ sudo -u steam wget https://steamcdn-a.akamaihd.net/client/installer/steamcmd_lin
 sudo -u steam tar -xvzf steamcmd_linux.tar.gz
 ```
 
+### Debian 12 Notes
+
+```
+dpkg --add-architecture i386
+apt update
+apt install libstdc++6:i386
+```
+
 ## Installing Game Servers
 
 Note: If you get an authentication error you'll need to login with your steam account.
