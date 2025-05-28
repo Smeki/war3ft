@@ -13,11 +13,10 @@ This is an AMX MOD X plugin that implements Warcraft 3: Frozen Throne RPG elemen
 
 ## Prerequisites
 
-To compile and use this plugin, you need:
+To use this plugin, you need:
 
 1. AMX Mod X 1.8.2 or later
-2. Metamod installed on your HLDS server
-3. AMX Mod X compiler (amxxpc)
+2. Metamod
 
 ## Documentation
 
