@@ -15,7 +15,7 @@ This is an AMX MOD X plugin that implements Warcraft 3: Frozen Throne RPG elemen
 
 To use this plugin, you need:
 
-1. AMX Mod X 1.8.2 or later
+1. AMX Mod X 1.8.2 or later (1.10+ is recommended)
 2. Metamod
 
 ## Documentation
