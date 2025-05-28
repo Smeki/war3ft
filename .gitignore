@@ -6,3 +6,4 @@ amxmodx*.zip
 amxmodx*.tar.gz
 metamod*.zip
 amxx/
+.env

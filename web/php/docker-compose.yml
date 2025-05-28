@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "8080:80"
+    environment:
+      - DB_HOST=${DB_HOST:-localhost}
+      - DB_USERNAME=${DB_USERNAME:-root}
+      - DB_PASSWORD=${DB_PASSWORD:-}
+      - DB_NAME=${DB_NAME:-amx}
+      - TIMEZONE=${TIMEZONE:-UTC}
+      - ERROR_REPORTING=${ERROR_REPORTING:-1}
+    volumes:
+      - ./src:/var/www/html
