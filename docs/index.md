@@ -39,7 +39,7 @@ The original wiki documentation was hosted at [wiki.wc3mods.net](https://wiki.wc
 If you need help or have questions:
 
 1. Check the [FAQ](faq.md) first
-2. Seagrch throuh existing [GitHub Issues](../issues)
+2. Search throuh existing [GitHub Issues](../issues)
 3. Create a new issue if your problem hasn't been addressed
 
 ## Plugin Authors
