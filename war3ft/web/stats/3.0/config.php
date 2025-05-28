@@ -3,7 +3,7 @@
 *	This is the configuration file, please
 *	enter the mysql information below
 *
-*	Details at http://war3ft.com
+*	Details at https://war3ft.net
 *
 *	Credits:
 *		Design set up by b4p

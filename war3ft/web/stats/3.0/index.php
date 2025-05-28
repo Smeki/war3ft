@@ -96,7 +96,7 @@
 	}
 	
 ?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "https://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
 	<title>Warcraft 3 Frozen Throne Statistics</title>
@@ -397,8 +397,8 @@
 </div>
 
 <div class="cBottom">
-	<br /><font size="1">Powered by <a href="http://wc3mods.net/" target="_blank">Warcraft 3 Mods</a> v1.2.1</font><br />
-	<font size="1"><a href="http://war3ft.com/downloads.php" target="_blank">Get this for your site!</a></font><br /><br />
+	<br /><font size="1">Powered by <a href="https://war3ft.net/" target="_blank">Warcraft 3 Mods</a> v1.2.1</font><br />
+	<font size="1"><a href="https://war3ft.net/downloads.php" target="_blank">Get this for your site!</a></font><br /><br />
 </div>
 </form>
 </body>

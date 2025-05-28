@@ -2,7 +2,7 @@
 
 	// ==================================================================
 	//  Author: Justin Vincent (justin@visunet.ie)
-	//	Web: 	http://php.justinvincent.com
+	//	Web: 	https://php.justinvincent.com
 	//	Name: 	ezSQL
 	// 	Desc: 	Class to make it very easy to deal with mySQL database connections.
 	//

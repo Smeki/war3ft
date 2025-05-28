@@ -1,8 +1,5 @@
 <?
-// Configuration options for MySQL are defined in config.php
-// Developed by 4HM | Pimp Daddy for the Warcraft 3 Frozen Throne MOD
-// Will also work with WAR3 MOD 4 Race
-// Visit http://4honor.net/forum/viewforum.php?f=28 for updates
+// Visit war3ft.net for more information
 
 require('./config.php');
 $display=0;
@@ -489,5 +486,5 @@ else if($idexists<>""){
 ?>
 <? } ?>
 <BR><BR><BR>
-<CENTER><a href="http://wc3mods.net" target="_blank">wc3mods.net</a></CENTER><BR><BR>
+<CENTER><a href="https://war3ft.net" target="_blank">war3ft.net</a></CENTER><BR><BR>
 </BODY></HTML>
