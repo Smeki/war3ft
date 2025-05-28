@@ -16,60 +16,12 @@ This is an AMX MOD X plugin that implements Warcraft 3: Frozen Throne RPG elemen
 To compile and use this plugin, you need:
 
 1. AMX Mod X 1.8.2 or later
-2. Metamod installed on your Counter-Strike server
+2. Metamod installed on your HLDS server
 3. AMX Mod X compiler (amxxpc)
 
-## Directory Structure
+## Documentation
 
-```
-war3ft/
-├── war3ft.sma          # Main plugin source file
-├── configs/            # Configuration files
-├── data/              # Data files
-├── war3ft/            # Plugin specific files
-├── web/               # Web interface files
-└── wc3.css            # Stylesheet for web interface
-```
-
-## Compilation Instructions
-
-1. **Install AMX Mod X Development Kit**
-   - Download the latest AMX Mod X Dev Kit from [www.amxmodx.org](https://www.amxmodx.org/downloads.php)
-   - Extract it to a convenient location
-
-2. **Set up the environment**
-   - Add the AMX Mod X compiler directory to your system PATH
-   - Ensure you have all required include files in your compiler's include directory
-
-3. **Compile the plugin**
-   ```bash
-   # Navigate to the plugin directory
-   cd war3ft
-
-   # Compile using amxxpc
-   amxxpc war3ft.sma
-   ```
-   This will generate `war3ft.amxx` file
-
-4. **Installation**
-   - Copy `war3ft.amxx` to your server's `addons/amxmodx/plugins/` directory
-   - Copy contents of `configs/` to your server's `addons/amxmodx/configs/` directory
-   - Copy other necessary files to their respective directories
-
-## Configuration
-
-1. Add the following to your `plugins.ini`:
-   ```
-   war3ft.amxx
-   ```
-
-2. Configure the plugin settings in the config files located in the `configs/` directory
-
-## Common Issues
-
-- If compilation fails, ensure all required include files are present
-- Check the compiler's error messages for missing includes or syntax errors
-- Verify that all dependencies are installed correctly
+[You can find all documentation right here on github](docs/index.md)!
 
 ## Support
 
