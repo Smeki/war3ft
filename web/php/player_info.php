@@ -1,490 +1,351 @@
-<?
+<?php
 // Visit war3ft.net for more information
 
 require('./config.php');
-$display=0;
-$nameexists="";
-$playername="";
-$idexists="";
-if (!empty($_GET)){
-	if (is_array($_GET)){
-		$is_magic_quotes = get_magic_quotes_gpc();	
-		foreach($_GET AS $key => $playername) {
-			$temp = $playername;
-		}
-	}
-	$display=1;
-}
-else if(!empty($_POST)){
-	$nameexists = $HTTP_POST_VARS['playername'];
-	$idexists = $HTTP_POST_VARS['playerid'];
-	$display=1;
-}
-else{
-	echo "<BR><BR><CENTER>No player name AND/OR STEAM ID found</CENTER><BR><BR>";
-	$display=0;
-}
-?>
 
-<? if ($display==1){ ?>
-<?
-function image($level,$var){
-	if ($var == 1){
-		switch ($level){
-			case 0:
-				$image= "level0.gif";
-				break;
-			case 1:
-				$image= "level1.gif";
-				break;
-			case 2:
-				$image= "level2.gif";
-				break;
-			case 3:
-				$image= "level3.gif";
-				break;
-		}
-		return $image;
+$display = 0;
+$nameexists = "";
+$playername = "";
+$idexists = "";
+
+// Handle GET parameters
+if (!empty($_GET)) {
+	$playername = array_values($_GET)[0] ?? '';
+	$playername = htmlspecialchars($playername, ENT_QUOTES, 'UTF-8');
+	$display = 1;
+}
+// Handle POST parameters
+elseif (!empty($_POST)) {
+	$nameexists = $_POST['playername'] ?? '';
+	$idexists = $_POST['playerid'] ?? '';
+	$nameexists = htmlspecialchars($nameexists, ENT_QUOTES, 'UTF-8');
+	$idexists = htmlspecialchars($idexists, ENT_QUOTES, 'UTF-8');
+	$display = 1;
+}
+else {
+	echo "<br><br><center>No player name AND/OR STEAM ID found</center><br><br>";
+	$display = 0;
+}
+
+if ($display == 1):
+
+function image(int $level, int $var): string {
+	if ($var == 1) {
+		$images = [
+			0 => "level0.gif",
+			1 => "level1.gif",
+			2 => "level2.gif",
+			3 => "level3.gif"
+		];
+		return $images[$level] ?? '';
 	}
-	else if ($var == 2){
-		switch ($level){
-			case 0:
-				$image = "ultimate0.gif";
-				break;
-			case 1:
-				$image = "ultimate1.gif";
-				break;
-		}
-		return $image;
+	elseif ($var == 2) {
+		$images = [
+			0 => "ultimate0.gif",
+			1 => "ultimate1.gif"
+		];
+		return $images[$level] ?? '';
 	}
 	return "";
 }
 
-function skill($race,$ability){
-	switch($race){
-		case 1:
-			switch ($ability){
-				case 1:
-					$var = "<IMG SRC=./images/vampire.gif> Vampiric Aura";
-					break;
-				case 2:
-					$var = "<IMG SRC=./images/unholyaura.gif> Unholy Aura";
-					break;
-				case 3:
-					$var = "<IMG SRC=./images/levitation.gif> Levitation";
-					break;
-				case 4:
-					$var = "<IMG SRC=./images/suicide.gif> Suicide Bomber";
-					break;
-			}
-		break;
-		case 2:
-			switch ($ability){
-				case 1:
-					$var = "<IMG SRC=./images/invisibility.gif> Invisibility";
-					break;
-				case 2:
-					$var = "<IMG SRC=./images/devotion.gif> Devotion";
-					break;
-				case 3:
-					$var = "<IMG SRC=./images/bash.gif> Bash";
-					break;
-				case 4:
-					$var = "<IMG SRC=./images/teleport.gif> Teleport";
-					break;
-			}
-		break;
-		case 3:
-			switch ($ability){
-				case 1:
-					$var = "<IMG SRC=./images/critstrike.gif> Critical Strike";
-					break;
-				case 2:
-					$var = "<IMG SRC=./images/grenade.gif> Critical Grenade";
-					break;
-				case 3:
-					$var = "<IMG SRC=./images/reincarnation.gif> Reincarnation";
-					break;
-				case 4:
-					$var = "<IMG SRC=./images/chainlightning.gif> Chain Lightning";
-					break;
-			}
-		break;
-		case 4:
-			switch ($ability){
-				case 1:
-					$var = "<IMG SRC=./images/evasion.gif> Evasion";
-					break;
-				case 2:
-					$var = "<IMG SRC=./images/thorns.gif> Thorns Aura";
-					break;
-				case 3:
-					$var = "<IMG SRC=./images/trueshot.gif> Trueshot Aura";
-					break;
-				case 4:
-					$var = "<IMG SRC=./images/entangleroots.gif> Entangle Roots";
-					break;
-			}
-		break;
-		case 5:
-			switch ($ability){
-				case 1:
-					$var = "<IMG SRC=./images/pheonix.gif> Pheonix";
-					break;
-				case 2:
-					$var = "<IMG SRC=./images/banish.gif> Banish";
-					break;
-				case 3:
-					$var = "<IMG SRC=./images/siphonmana.gif> Siphon Mana";
-					break;
-				case 4:
-					$var = "<IMG SRC=./images/flamestrike.gif> Flame Strike";
-					break;
-			}
-		break;
-		case 6:
-			switch ($ability){
-				case 1:
-					$var = "<IMG SRC=./images/healingwave.gif> Healing Wave";
-					break;
-				case 2:
-					$var = "<IMG SRC=./images/hex.gif> Hex";
-					break;
-				case 3:
-					$var = "<IMG SRC=./images/serpentward.gif> Serpent Ward";
-					break;
-				case 4:
-					$var = "<IMG SRC=./images/bigbadvoodoo.gif> Big Bad Voodoo";
-					break;
-			}
-		break;
-		case 7:
-			switch ($ability){
-				case 1:
-					$var = "<IMG SRC=./images/fanofknives.gif> Fan of Knives";
-					break;
-				case 2:
-					$var = "<IMG SRC=./images/blink.gif> Blink";
-					break;
-				case 3:
-					$var = "<IMG SRC=./images/shadowstrike.gif> Shadow Strike";
-					break;
-				case 4:
-					$var = "<IMG SRC=./images/vengeance.gif> Vengeance";
-					break;
-			}
-		break;
-		case 8:
-			switch ($ability){
-				case 1:
-					$var = "<IMG SRC=./images/impale.gif> Impale";
-					break;
-				case 2:
-					$var = "<IMG SRC=./images/spikedcarapace.gif> Spiked Carapace";
-					break;
-				case 3:
-					$var = "<IMG SRC=./images/carrionbeetles.gif> Carrion Beetles";
-					break;
-				case 4:
-					$var = "<IMG SRC=./images/locustswarm.gif> Locust Swarm";
-					break;
-			}
-		break;
+function skill(int $race, int $ability): string {
+	$skills = [
+		1 => [ // Undead Scourge
+			1 => "<img src='./images/vampire.gif' alt='Vampire'> Vampiric Aura",
+			2 => "<img src='./images/unholyaura.gif' alt='Unholy Aura'> Unholy Aura",
+			3 => "<img src='./images/levitation.gif' alt='Levitation'> Levitation",
+			4 => "<img src='./images/suicide.gif' alt='Suicide'> Suicide Bomber"
+		],
+		2 => [ // Human Alliance
+			1 => "<img src='./images/invisibility.gif' alt='Invisibility'> Invisibility",
+			2 => "<img src='./images/devotion.gif' alt='Devotion'> Devotion",
+			3 => "<img src='./images/bash.gif' alt='Bash'> Bash",
+			4 => "<img src='./images/teleport.gif' alt='Teleport'> Teleport"
+		],
+		3 => [ // Orcish Horde
+			1 => "<img src='./images/critstrike.gif' alt='Critical Strike'> Critical Strike",
+			2 => "<img src='./images/grenade.gif' alt='Critical Grenade'> Critical Grenade",
+			3 => "<img src='./images/reincarnation.gif' alt='Reincarnation'> Reincarnation",
+			4 => "<img src='./images/chainlightning.gif' alt='Chain Lightning'> Chain Lightning"
+		],
+		4 => [ // Night Elf
+			1 => "<img src='./images/evasion.gif' alt='Evasion'> Evasion",
+			2 => "<img src='./images/thorns.gif' alt='Thorns Aura'> Thorns Aura",
+			3 => "<img src='./images/trueshot.gif' alt='Trueshot Aura'> Trueshot Aura",
+			4 => "<img src='./images/entangleroots.gif' alt='Entangle Roots'> Entangle Roots"
+		],
+		5 => [ // Blood Mage
+			1 => "<img src='./images/pheonix.gif' alt='Phoenix'> Phoenix",
+			2 => "<img src='./images/banish.gif' alt='Banish'> Banish",
+			3 => "<img src='./images/siphonmana.gif' alt='Siphon Mana'> Siphon Mana",
+			4 => "<img src='./images/flamestrike.gif' alt='Flame Strike'> Flame Strike"
+		],
+		6 => [ // Shadow Hunter
+			1 => "<img src='./images/healingwave.gif' alt='Healing Wave'> Healing Wave",
+			2 => "<img src='./images/hex.gif' alt='Hex'> Hex",
+			3 => "<img src='./images/serpentward.gif' alt='Serpent Ward'> Serpent Ward",
+			4 => "<img src='./images/bigbadvoodoo.gif' alt='Big Bad Voodoo'> Big Bad Voodoo"
+		],
+		7 => [ // Warden
+			1 => "<img src='./images/fanofknives.gif' alt='Fan of Knives'> Fan of Knives",
+			2 => "<img src='./images/blink.gif' alt='Blink'> Blink",
+			3 => "<img src='./images/shadowstrike.gif' alt='Shadow Strike'> Shadow Strike",
+			4 => "<img src='./images/vengeance.gif' alt='Vengeance'> Vengeance"
+		],
+		8 => [ // Crypt Lord
+			1 => "<img src='./images/impale.gif' alt='Impale'> Impale",
+			2 => "<img src='./images/spikedcarapace.gif' alt='Spiked Carapace'> Spiked Carapace",
+			3 => "<img src='./images/carrionbeetles.gif' alt='Carrion Beetles'> Carrion Beetles",
+			4 => "<img src='./images/locustswarm.gif' alt='Locust Swarm'> Locust Swarm"
+		]
+	];
+	
+	return $skills[$race][$ability] ?? '';
+}
+
+function description(int $race, int $ability): string {
+	$descriptions = [
+		1 => [ // Undead Scourge
+			1 => "You have a chance to steal health from your enemy",
+			2 => "You gain health regeneration and speed",
+			3 => "You have a chance of jumping over your enemy",
+			4 => "You explode on death, damaging nearby enemies"
+		],
+		2 => [ // Human Alliance
+			1 => "You become invisible for a short time",
+			2 => "You gain armor",
+			3 => "You have a chance to stun your enemy",
+			4 => "You can teleport to a teammate"
+		],
+		3 => [ // Orcish Horde
+			1 => "You have a chance to do extra damage",
+			2 => "You have a chance to do extra damage with grenades",
+			3 => "You have a chance to come back to life",
+			4 => "Lightning bounces between enemies"
+		],
+		4 => [ // Night Elf
+			1 => "You have a chance to dodge attacks",
+			2 => "Enemies take damage when they hit you",
+			3 => "Your teammates gain damage",
+			4 => "You can root an enemy in place"
+		],
+		5 => [ // Blood Mage
+			1 => "You summon a phoenix to help you",
+			2 => "You can banish an enemy",
+			3 => "You steal mana from your enemy",
+			4 => "You call down a flame strike"
+		],
+		6 => [ // Shadow Hunter
+			1 => "You heal yourself and nearby allies",
+			2 => "You turn an enemy into a critter",
+			3 => "You place a ward that attacks enemies",
+			4 => "You and nearby allies become invulnerable"
+		],
+		7 => [ // Warden
+			1 => "You have a chance of becoming a mole",
+			2 => "Disables ALL enemy ultimates and reduces damage from moles",
+			3 => "You have a chance of hurling a poisoned dagger at the enemy",
+			4 => "You will respawn once with 50 health"
+		],
+		8 => [ // Crypt Lord
+			1 => "Distorts the enemy",
+			2 => "Does mirror damage to the person who shot you, you also gain armor",
+			3 => "You have a chance of your beetles attacking the enemy when on target",
+			4 => "A Swarm of Locusts attacks the enemy"
+		]
+	];
+	
+	return $descriptions[$race][$ability] ?? '';
+}
+
+function race2(int $num): string {
+	$races = [
+		1 => "Undead Scourge",
+		2 => "Human Alliance",
+		3 => "Orcish Horde",
+		4 => "Night Elves of Kalimdor",
+		5 => "Blood Mage",
+		6 => "Shadow Hunter",
+		7 => "Warden",
+		8 => "Crypt Lord"
+	];
+	
+	return $races[$num] ?? "None";
+}
+?>
+<!DOCTYPE html>
+<html>
+<head>
+	<title><?php 
+	if ($nameexists) {
+		echo htmlspecialchars($nameexists, ENT_QUOTES, 'UTF-8');
+	} elseif ($playername) {
+		echo htmlspecialchars($playername, ENT_QUOTES, 'UTF-8');
+	} elseif ($idexists) {
+		echo htmlspecialchars($idexists, ENT_QUOTES, 'UTF-8');
 	}
-	return $var;
-}
+	?>'s Race Information</title>
+	<link href="layout.css" rel="stylesheet" type="text/css">
+</head>
+<body style="background-image: url('crestbackground.jpg')" bgproperties="fixed">
+	<br>
+	<center>
+		Warcraft 3 Frozen Throne stats brought to you by Geesu<br>
 
-function description($race,$ability){
-	switch($race){
-		case 1:
-			switch ($ability){
-				case 1:
-					$var= "Gives you life leech";
-					break;
-				case 2:
-					$var= "Gives you a speed boost, also all weapons make you move at the same speed";
-					break;
-				case 3:
-					$var= "Allows you to jump higher";
-					break;
-				case 4:
-					$var= "Player will explode when he dies, killing enemies around him";
-					break;
-			}
-		break;
-		case 2:
-			switch ($ability){
-				case 1:
-					$var= "You become partially invisible";
-					break;
-				case 2:
-					$var= "Gives you more health at the start of each round";
-					break;
-				case 3:
-					$var= "When you shoot someone you have a chance of rendering them immobile for 1 second";
-					break;
-				case 4:
-					$var= "Ability to teleport where you are looking";
-					break;
-			}
-		break;
-		case 3:
-			switch ($ability){
-				case 1:
-					$var= "Gives you a chance of doing more damage on each shot";
-					break;
-				case 2:
-					$var= "Will ALWAYS more damage when you hit someone with a grenade";
-					break;
-				case 3:
-					$var= "Gives you a chance in respawning with the equipment you had before you died last round";
-					break;
-				case 4:
-					$var= "Ability to cast chain lightning, damage decreases by 2/3 each jump";
-					break;
-			}
-		break;
-		case 4:
-			switch ($ability){
-				case 1:
-					$var= "Gives you a chance of evading a shot";
-					break;
-				case 2:
-					$var= "Does mirror damage to the person who shot you";
-					break;
-				case 3:
-					$var= "Does extra damage on each of your bullets";
-					break;
-				case 4:
-					$var= "Immobilizes enemy for 10 seconds.";
-					break;
-			}
-		break;
-		case 5:
-			switch ($ability){
-				case 1:
-					$var= "You have a chance of reviving the fist teammate who dies";
-					break;
-				case 2:
-					$var= "You have a chance of slapping your enemy";
-					break;
-				case 3:
-					$var= "Steal money from your enemy";
-					break;
-				case 4:
-					$var= "You receive a flame thrower";
-					break;
-			}
-		break;
-		case 6:
-			switch ($ability){
-				case 1:
-					$var= "Heals yourself and your nearby teammates";
-					break;
-				case 2:
-					$var= "You have a chance of turning your enemy into a big goober";
-					break;
-				case 3:
-					$var= "You receive serpent wards each round that damage nearby enemy units";
-					break;
-				case 4:
-					$var= "Invincibility for 2 seconds";
-					break;
-			}
-		break;
-		case 7:
-			switch ($ability){
-				case 1:
-					$var= "You have a chance of becoming a mole";
-					break;
-				case 2:
-					$var= "Disables ALL enemy ultimates and reduces damage from moles";
-					break;
-				case 3:
-					$var= "You have a chance of hurling a poisoned dagger at the enemy";
-					break;
-				case 4:
-					$var= "You will respawn once with 50 health";
-					break;
-			}
-		break;
-		case 8:
-			switch ($ability){
-				case 1:
-					$var= "Distorts the enemy";
-					break;
-				case 2:
-					$var= "Does mirror damage to the person who shot you, you also gain armor";
-					break;
-				case 3:
-					$var= "You have a chance of your beetles attacking the enemy when on target";
-					break;
-				case 4:
-					$var= "A Swarm of Locusts attacks the enemy";
-					break;
-			}
-		break;
-		}
-	return $var;
+<?php
+try {
+	$dsn = "mysql:host=$host;dbname=$dbname;charset=utf8mb4";
+	$options = [
+		PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+		PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+		PDO::ATTR_EMULATE_PREPARES => false,
+	];
+	
+	$pdo = new PDO($dsn, $username, $pass, $options);
+	
+	$base_query = "SELECT * FROM `wc3_player` JOIN `wc3_player_extra` ON `wc3_player`.`player_id` = `wc3_player_extra`.`player_id` JOIN `wc3_player_race` ON `wc3_player`.`player_id` = `wc3_player_race`.`player_id`";
 
-}
-
-function race2($num){
-	switch ($num){
-		case 1:
-			$var = "Undead Scourge";
-			break;
-		case 2:
-			$var = "Human Alliance";
-			break;
-		case 3:
-			$var = "Orcish Horde";
-			break;
-		case 4:
-			$var = "Night Elves of Kalimdor";
-			break;
-		case 5:
-			$var = "Blood Mage";
-			break;
-		case 6:
-			$var = "Shadow Hunter";
-			break;
-		case 7:
-			$var = "Warden";
-			break;
-		case 8:
-			$var = "Crypt Lord";
-			break;
-	}
-	return $var;
-}
-?>
-<HTML>
-<? if($nameexists<>""){ ?>
-<HEAD><TITLE><? echo $nameexists; ?>'s Race Information</TITLE></HEAD>
-<?
-}
-else if($playername<>""){
-?>
-<HEAD><TITLE><? echo $playername; ?>'s Race Information</TITLE></HEAD>
-<?
-}
-else if($idexists<>""){
-?>
-<HEAD><TITLE><? echo $idexists; ?>'s Race Information</TITLE></HEAD>
-<? } ?>
-
-<link href="layout.css" rel="stylesheet" type="text/css">
-<body style="background-image: url('crestbackground.jpg')" bgproperties="fixed"><BR><center>Warcraft 3 Frozen Throne stats brought to you by Geesu/Pimp Daddy<br>
-
-<?
-	$LocalConn = mysql_connect($host,$username,$pass) or die("Could not connect : " . mysql_error());
-	mysql_select_db($dbname) or die("Could not select " . $dbname . " database");
 	$open = 0;
-	if($playername<>""){
-		$query= "SELECT * FROM `" . $tbname . "` WHERE ('race'>'0' AND `playername` LIKE '" . $playername . "') LIMIT 0 , 8";
+	if ($playername) {
+		$stmt = $pdo->prepare("$base_query WHERE `wc3_player_race`.`race_id` > 0 AND `wc3_player_extra`.`player_name` = ? LIMIT 8");
+		$stmt->execute([$playername]);
 		$open = 1;
 	}
-	else if($nameexists<>""){
-		$query= "SELECT * FROM `" . $tbname . "` WHERE (1 AND `playername`  LIKE '" . $nameexists . "%' AND 'race'>'0') LIMIT 0 , 8";
+	elseif ($nameexists) {
+		$stmt = $pdo->prepare("$base_query WHERE `wc3_player_race`.`race_id` > 0 AND `wc3_player_extra`.`player_name` LIKE ? LIMIT 8");
+		$stmt->execute([$nameexists . '%']);
 		$open = 1;
 	}
-	else{
+	else {
 		$open = 0;
 		$playerid = $idexists;
 		$found = 1;
 	}
 
-	if($open==1){
-		$result = mysql_query($query) or die("Query failed : " . mysql_error());
-		$recordcount = mysql_num_rows($result);
-		if($recordcount==0){
+	if ($open == 1) {
+		$results = $stmt->fetchAll();
+		$recordcount = count($results);
+		
+		if ($recordcount == 0) {
 			$found = 0;
-			if($playername<>"")
-				echo "<BR><BR><BR><center> No player by the name of " . $playername . " was found in our database.</center>";
-			else if($nameexists<>"")
-				echo "<BR><BR><BR><center> No player by the name of " . $nameexists . " was found in our database.</center>";
-		}
-		else if($recordcount>1 && $nameexists<>""){
-			$found = 0;
-			echo "<CENTER><BR><BR><BR>These names were found:<BR><BR>";
-			$temp=0;
-			while($my_row = mysql_fetch_row($result)){
-				if($temp!=$my_row[1])
-					echo "<a href='player_info.php?info=" . $my_row[1] . "'>" . $my_row[1] . "</a><BR>";
-				$temp = $my_row[1];
+			if ($playername) {
+				echo "<br><br><br><center>No player by the name of " . htmlspecialchars($playername, ENT_QUOTES, 'UTF-8') . " was found in our database.</center>";
+			} elseif ($nameexists) {
+				echo "<br><br><br><center>No player by the name of " . htmlspecialchars($nameexists, ENT_QUOTES, 'UTF-8') . " was found in our database.</center>";
 			}
 		}
-		else{
+		elseif ($recordcount > 1 && $nameexists) {
+			$found = 0;
+			echo "<center><br><br><br>These names were found:<br><br>";
+			$seen = [];
+			foreach ($results as $row) {
+				if (!isset($seen[$row['playername']])) {
+					echo "<a href='player_info.php?info=" . urlencode($row['playername']) . "'>" . 
+						 htmlspecialchars($row['playername'], ENT_QUOTES, 'UTF-8') . "</a><br>";
+					$seen[$row['playername']] = true;
+				}
+			}
+		}
+		else {
 			$found = 1;
-			$my_row = mysql_fetch_row($result);
-			$playerid=$my_row[0];
+			$playerid = $results[0]['player_id'];
 		}
 	}
 
-	
-	if($found==1){
-		$query="SELECT * FROM `" . $tbname . "` WHERE ('race'<>'0' AND `playerid` LIKE '" . $playerid . "') LIMIT 0 , 8;";
-		$result = mysql_query($query) or die("Query failed : " . mysql_error());
-		$recordcount = mysql_num_rows($result);
-		if($recordcount<1)
-			echo "<BR><BR><BR><center> No player by the STEAM ID of " . $playerid . " was found in our database.</center>" . Chr(10);
-		else{
-			echo "<title>" . $idexists . "'s Statistics</title></head><body>" . Chr(10);
-			echo "<BR><BR><center><font size=4>";
-			if($nameexists<>"")
-				echo $nameexists;
-			else if($playername<>"")
-				echo $playername;
-			else if($idexists<>"")
-				echo $idexists;
-			echo "'s Race Information</font></center><br><br><br>" . Chr(10);
-			$x=0;
-			while($x<4 && $recordcount>0){
-				$my_row = mysql_fetch_row($result);
-				echo "<table border=0 cellpadding=0 cellspacing=0 width=100% style=border-collapse:collapse bordercolor=#111111><tr><td width=50% >" . Chr(10);
-				$i=0;
-				while($i<2 && $recordcount>0){
-					$race=$my_row[3];
-					if($race!=0){
-						if ($i == 1)
-							echo "<td width=50% >";
-						$xp = $my_row[2];
-						$skill1=$my_row[4];	
-						$skill2=$my_row[5];
-						$skill3=$my_row[6];
-						$skill4=$my_row[7];
-						echo "<div align=center><center><table border=0 cellpadding=0 cellspacing=0 width=80% style=border-collapse:collapse bordercolor=#111111>" . Chr(10);
-						echo "<tr><td width=100% ><center>" . race2($race) . "</center></td></tr></table></center></div><div align=center><center>" . Chr(10);
-						echo "<table border=0 cellpadding=0 cellspacing=0 style=border-collapse:collapse bordercolor=#111111 id=AutoNumber1 width=80% >" . Chr(10);
-						echo "<tr><td width=50% ><p align=right>XP&nbsp;&nbsp;&nbsp;</p></td><td width=50% ><p align=left>&nbsp;&nbsp;&nbsp;" . $xp . "</p></td></tr></table>" . Chr(10);
-						echo "</center></div><div align=center><center><table border=0 cellpadding=0 cellspacing=0 style=border-collapse:collapse bordercolor=#111111 id=AutoNumber2 width=80% >" . Chr(10);
-						echo "<tr><td width=40% ><center>Skill</center></td><td width=20% ><center>Level</center></td><td width=40% ><center>Description</center></td></tr>" . Chr(10);
-						echo "<tr><td width=40% >" . skill($race,1) . "</td><td width=20% ><center><IMG SRC=./images/" . image($skill1,1) . "></center></td><td width=40% >" . description($race,1) . "</td></tr>" . Chr(10);
-						echo "<tr><td width=40% >" . skill($race,2) . "</td><td width=20% ><center><IMG SRC=./images/" . image($skill2,1) . "></center></td><td width=40% >" . description($race,2) . "</td></tr>" . Chr(10);
-						echo "<tr><td width=40% >" . skill($race,3) . "</td><td width=20% ><center><IMG SRC=./images/" . image($skill3,1) . "></center></td><td width=40% >" . description($race,3) . "</td></tr>" . Chr(10);
-						echo "<tr><td width=40% >" . skill($race,4) . "</td><td width=20% ><center><IMG SRC=./images/" . image($skill4,2) . "></center></td><td width=40% >" . description($race,4) . "</td></tr>" . Chr(10);
-						echo "</tr></table></center></div></td>" . Chr(10);
-						if ($i == 1)
-							echo "</td></tr></table>" . Chr(10);
-						if($i==0)
-							$my_row = mysql_fetch_row($result);
-						$i=$i+1;
+	if ($found == 1) {
+		$stmt = $pdo->prepare("$base_query JOIN `wc3_player_skill` ON `wc3_player`.`player_id` = `wc3_player_skill`.`player_id` WHERE `wc3_player_race`.`race_id` != 0 AND `wc3_player`.`player_id` = ?");
+		$stmt->execute([$playerid]);
+		$results = $stmt->fetchAll(PDO::FETCH_GROUP|PDO::FETCH_ASSOC);
+		
+		if (empty($results)) {
+			echo "<br><br><br><center>No player by the STEAM ID of " . htmlspecialchars($playerid, ENT_QUOTES, 'UTF-8') . " was found in our database.</center>\n";
+		}
+		else {
+			echo "<br><br><center><font size=4>";
+			if ($nameexists) {
+				echo htmlspecialchars($nameexists, ENT_QUOTES, 'UTF-8');
+			} elseif ($playername) {
+				echo htmlspecialchars($playername, ENT_QUOTES, 'UTF-8');
+			} elseif ($idexists) {
+				echo htmlspecialchars($idexists, ENT_QUOTES, 'UTF-8');
+			}
+			echo "'s Race Information</font></center><br><br><br>\n";
+			
+			$races = [];
+			foreach ($results as $player_id => $records) {
+				foreach ($records as $record) {
+					$race_id = $record['race_id'];
+					if (!isset($races[$race_id])) {
+						$races[$race_id] = [
+							'race_id' => $race_id,
+							'race_xp' => $record['race_xp'],
+							'skills' => array_fill(0, 4, 0)  // Initialize all skills to 0
+						];
 					}
-					else
-						$my_row = mysql_fetch_row($result);
-					$recordcount--;	
+					// Update skill level if this record has one
+					if (isset($record['skill_id']) && isset($record['skill_level'])) {
+						$skill_id = (int)$record['skill_id'];
+						if ($skill_id >= 0 && $skill_id <= 3) {  // Convert 0-based skill_id to 1-based for display
+							$races[$race_id]['skills'][$skill_id] = (int)$record['skill_level'];
+						}
+					}
 				}
-				if ($i==1){
-					echo "<td width=50% ></td></tr></table>" . Chr(10);
-					$recordcount--;
+			}
+			
+			$x = 0;
+			foreach ($races as $race) {
+				if ($x % 2 == 0) {
+					echo "<table border=0 cellpadding=0 cellspacing=0 width=100% style='border-collapse:collapse' bordercolor='#111111'><tr>\n";
+				}
+				
+				echo "<td width='50%'>\n";
+				echo "<div align='center'><center>\n";
+				echo "<table border=0 cellpadding=0 cellspacing=0 width='80%' style='border-collapse:collapse' bordercolor='#111111'>\n";
+				echo "<tr><td width='100%'><center>" . race2((int)$race['race_id']) . "</center></td></tr></table></center></div>\n";
+				echo "<div align='center'><center>\n";
+				echo "<table border=0 cellpadding=0 cellspacing=0 style='border-collapse:collapse' bordercolor='#111111' width='80%'>\n";
+				echo "<tr><td width='50%'><p align='right'>XP&nbsp;&nbsp;&nbsp;</p></td>";
+				echo "<td width='50%'><p align='left'>&nbsp;&nbsp;&nbsp;" . htmlspecialchars($race['race_xp'], ENT_QUOTES, 'UTF-8') . "</p></td></tr></table>\n";
+				echo "</center></div>\n";
+				echo "<div align='center'><center>\n";
+				echo "<table border=0 cellpadding=0 cellspacing=0 style='border-collapse:collapse' bordercolor='#111111' width='80%'>\n";
+				echo "<tr><td width='40%'><center>Skill</center></td>";
+				echo "<td width='20%'><center>Level</center></td>";
+				echo "<td width='40%'><center>Description</center></td></tr>\n";
+				
+				for ($skill = 1; $skill <= 4; $skill++) {
+					$skillLevel = $race['skills'][$skill - 1];  // Convert 1-based skill to 0-based array index
+					$imageType = ($skill == 4) ? 2 : 1;
+					
+					echo "<tr>";
+					echo "<td width='40%'>" . skill((int)$race['race_id'], $skill) . "</td>";
+					echo "<td width='20%'><center><img src='./images/" . image((int)$skillLevel, $imageType) . "' alt='Level $skillLevel'></center></td>";
+					echo "<td width='40%'>" . description((int)$race['race_id'], $skill) . "</td>";
+					echo "</tr>\n";
+				}
+				
+				echo "</table></center></div>\n";
+				echo "</td>\n";
+				
+				if ($x % 2 == 1 || $x == count($races) - 1) {
+					if ($x % 2 == 0) {
+						echo "<td width='50%'></td>";
+					}
+					echo "</tr></table>\n";
 				}
 				$x++;
 			}
 		}
 	}
+} catch (PDOException $e) {
+	error_log("Database Error: " . $e->getMessage());
+	echo "<br><br><center>An error occurred while fetching the data. Please try again later.</center>";
+}
+endif;
 ?>
-<? } ?>
-<BR><BR><BR>
-<CENTER><a href="https://war3ft.net" target="_blank">war3ft.net</a></CENTER><BR><BR>
-</BODY></HTML>
+		<br><br><br>
+		<center><a href="https://war3ft.net" target="_blank">war3ft.net</a></center><br><br>
+	</center>
+</body>
+</html>
