@@ -21,7 +21,7 @@ To compile and use this plugin, you need:
 
 ## Documentation
 
-[You can find all documentation right here on github](docs/index.md)!
+[You can find all documentation right here on github](https://wc3mods.github.io/war3ft/)!
 
 ## Support
 

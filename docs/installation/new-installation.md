@@ -1,3 +1,9 @@
+---
+title: New Installation
+parent: Installation
+nav_order: 1
+---
+
 # Warcraft 3 Frozen Throne: New Installation Guide
 
 This guide will help you install Warcraft 3 Frozen Throne (war3ft) for Counter-Strike 1.6, Condition Zero, or Day of Defeat gaming servers.

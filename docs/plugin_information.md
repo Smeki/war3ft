@@ -1,3 +1,8 @@
+---
+title: Plugin Information
+nav_order: 2
+---
+
 # Warcraft 3 Frozen Throne: Plugin Information
 
 This document provides information about the Warcraft 3 Frozen Throne (war3ft) plugin for Counter-Strike, Condition Zero, and Day of Defeat servers.

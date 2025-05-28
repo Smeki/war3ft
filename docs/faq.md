@@ -1,3 +1,8 @@
+---
+title: Frequently Asked Questions
+nav_order: 4
+---
+
 # Warcraft 3 Frozen Throne: Frequently Asked Questions
 
 ## 📚 Table of Contents

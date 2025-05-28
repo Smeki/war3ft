@@ -1,3 +1,9 @@
+---
+layout: home
+nav_order: 1
+title: Warcraft 3 Frozen Throne Mod Documentation
+---
+
 # Warcraft 3 Frozen Throne Mod Documentation
 
 Welcome to the official documentation for the Warcraft 3 Frozen Throne mod for Half-Life. This documentation covers everything you need to know about installing, configuring, and using the mod.

@@ -1,3 +1,8 @@
+---
+title: Configuration
+nav_order: 3
+---
+
 # Warcraft 3 Frozen Throne: Plugin Configuration
 
 This document outlines all configurable options available in the `war3ft` plugin. These settings can be modified in the plugin's configuration file to tailor gameplay, XP saving, admin access, and more.

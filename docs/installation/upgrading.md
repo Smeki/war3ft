@@ -1,3 +1,9 @@
+---
+title: Upgrading
+parent: Installation
+nav_order: 2
+---
+
 # Warcraft 3 Frozen Throne: Upgrading Guide
 
 This guide will help you upgrade to the latest version of Warcraft 3 Frozen Throne (war3ft) for Counter-Strike or Condition Zero game servers.

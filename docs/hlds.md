@@ -1,3 +1,8 @@
+---
+title: HLDS Installation Guides
+nav_order: 5
+---
+
 # Linux Half-Life Dedicated Server Installation Guide
 
 This guide provides instructions for installing and configuring Half-Life Dedicated Server (HLDS) for various Steam games on Linux.
