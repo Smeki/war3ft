@@ -248,7 +248,7 @@ WORD_SKILLS = Skills
 RACE_INFORMATION = Race Information
 WAS_KILLED_BY = %s was killed by %s's %s
 
-MOTD_DEVELOPED_BY = Warcraft 3 Frozen Throne was developed by Geesu (also known as Pimp Daddy and OoTOAoO)
+MOTD_DEVELOPED_BY = Warcraft 3 Frozen Throne was developed by Geesu (also known as OoTOAoO)
 MOTD_CLICK_FOR_LATEST = Click <a href="http://www.war3ft.com">here</a> for the latest information and updates
 MOTD_MORE_INFO = Click <a href="http://war3ft.com/online/war3info.php?game=%s">here</a> for more information regarding the races
 

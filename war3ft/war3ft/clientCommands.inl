@@ -417,7 +417,7 @@ CMD_Handle( id, szCmd[], bool:bThroughSay )
 		p_data_b[id][PB_RESETSKILLS] = true;
 	}
 
-	else if ( CMD_Equal( id,  szCmd, "devs" ) || CMD_Equal( id,  szCmd, "developers" ) || CMD_Equal( id,  szCmd, "geesu" ) || CMD_Equal( id,  szCmd, "avanderik" ) || CMD_Equal( id,  szCmd, "ootoaoo" ) || CMD_Equal( id,  szCmd, "pimpdaddy" ) )
+	else if ( CMD_Equal( id,  szCmd, "devs" ) || CMD_Equal( id,  szCmd, "developers" ) || CMD_Equal( id,  szCmd, "geesu" ) || CMD_Equal( id,  szCmd, "avanderik" ) || CMD_Equal( id,  szCmd, "ootoaoo" ) )
 	{
 		WC3_CheckDev(id)
 	}

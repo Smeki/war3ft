@@ -262,7 +262,7 @@ public WC3_CheckDev( id )
 
 		if ( equal( szAuthid, "STEAM_0:0:76913" ) || equal( szAuthid, "STEAM_0:0:1230393" ) )
 		{
-			client_print( 0, print_chat, "%s The creator of this mod ( Geesu/Pimp Daddy/OoTOAoO ) is in this server", g_MODclient );
+			client_print( 0, print_chat, "%s The creator of this mod ( Geesu/OoTOAoO ) is in this server", g_MODclient );
 			bFound = true
 		}
 		else if ( equal( szAuthid, "STEAM_0:0:2243459" ) )
