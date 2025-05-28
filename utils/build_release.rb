@@ -164,7 +164,7 @@ class BuildService
 
   def create_main_zips
     # Create plugin zip with everything
-    create_zip(name: "war3ft-v#{@version}-plugin", build_dir: @build_tmp_dir)
+    create_zip(name: "war3ft-v#{@version}-plugin-amxmodx-#{@amxx_version}", build_dir: @build_tmp_dir)
     
     # Create client files zip with just the assets
     FileUtils.rm_rf("#{@build_dir}/addons")  # Temporarily remove addons folder
