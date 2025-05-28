@@ -25,7 +25,11 @@ sudo chown steam:steam /opt/steamcmd
 # Install required dependencies
 sudo apt-get update
 sudo apt-get install curl wget
-sudo apt-get install lib32gcc-s1 # For non-i386
+
+# For 64-bit
+sudo dpkg --add-architecture i386
+sudo apt update
+sudo apt install libstdc++6:i386
 
 # Download and extract SteamCMD
 cd /opt/steamcmd
