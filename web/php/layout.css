@@ -1,0 +1,10 @@
+A { text-decoration: none; color: #A0BFCE; }
+A:hover { text-decoration: underline; color: #D0D0D0; }
+A:active { text-decoration: underline; color: #A0BFCE; }
+BODY { font-family: Arial; font-size: 12pt; margin: 0; background: #343434;  color: #EEEEEE;}
+TR, DIV { font-family: Arial; font-size: 12pt; color: #D0D0D0; }
+
+.tablebg { background-color: #000000 }
+.plrgenhead { background-color: #505050 }
+.plrgenrow1 { background-color: #404040 }
+.plrgenrow2 { background-color: #606060 }
