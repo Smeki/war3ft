@@ -77,7 +77,7 @@ For issues, bug reports, or feature requests, please create an issue in the repo
 
 ## Changelog
 
-See [changelog.txt](war3ft/changelog.txt) for a detailed list of changes and updates.
+See [CHANGELOG.md](CHANGELOG.md) for a detailed list of changes and updates.
 
 ## License
 
