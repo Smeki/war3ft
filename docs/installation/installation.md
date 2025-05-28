@@ -5,8 +5,3 @@ has_children: true
 ---
 
 # Installation
-
-Choose one of the following installation guides:
-
-- [New Installation](new-installation.md)
-- [Upgrading](upgrading.md)
