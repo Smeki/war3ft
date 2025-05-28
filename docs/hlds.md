@@ -51,7 +51,7 @@ Note: If you get an authentication error you'll need to login with your steam ac
 sudo -u steam /opt/steamcmd/steamcmd.sh +force_install_dir /opt/steamcmd/server/ +login anonymous +app_update 90 validate +quit
 ```
 
-# Start your server
+#### Start your server
 ```bash
 cd /opt/steamcmd/server/
 ./hlds_run -console -game cstrike +ip 0.0.0.0 +port 27015 +map de_dust2 +maxplayers 32 +sv_lan 0
@@ -63,7 +63,7 @@ cd /opt/steamcmd/server/
 sudo -u steam /opt/steamcmd/steamcmd.sh +force_install_dir /opt/steamcmd/server/ +login anonymous +app_update 30 validate +quit
 ```
 
-# Start your server
+#### Start your server
 ```bash
 cd /opt/steamcmd/server/
 ./hlds_run -console -game dod +ip 0.0.0.0 +port 27016 +map dod_avalanche +maxplayers 32 +sv_lan 0
@@ -75,7 +75,7 @@ cd /opt/steamcmd/server/
 sudo -u steam /opt/steamcmd/steamcmd.sh +force_install_dir /opt/steamcmd/server/ +login anonymous +app_update 80 validate +quit
 ```
 
-# Start your server
+#### Start your server
 ```bash
 cd /opt/steamcmd/server/
 ./hlds_run -console -game czero +ip 0.0.0.0 +port 27017 +map de_dust2 +maxplayers 32 +sv_lan 0
