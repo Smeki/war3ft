@@ -283,6 +283,16 @@ unless options[:version]
   exit 1
 end
 
+# Check if version matches war3ft.sma
+war3ft_version = File.readlines(File.join(__dir__, '..', 'war3ft', 'war3ft.sma'))
+                    .find { |line| line.include?('new const WC3VERSION[]') }
+                    &.match(/"([^"]+)"/)&.[](1)
+
+unless war3ft_version == options[:version]
+  puts "ERROR: Specified version #{options[:version]} does not match version in war3ft.sma (#{war3ft_version})"
+  exit 1
+end
+
 # Clean up previous releases from previous runs
 root = File.expand_path(File.join(__dir__, '..'))
 release_dir = File.join(root, 'releases')
