@@ -16,7 +16,8 @@ class BuildService
     @build_tmp_dir = File.join(@root, 'build_tmp')
     @releases_dir = File.join(@root, 'releases')
     @amxx_dir = File.join(@root, 'amxx')
-    @src_dir = File.join(@root, 'war3ft')
+    @src_dir = File.join(@root, 'plugin_src')
+    @config_dir = File.join(@root, 'amxmodx')
     @asset_dir = File.join(@root, 'hl_assets')
     @util_dir = File.join(@root, 'utils')
     @games = %w[cstrike czero dod]
@@ -120,10 +121,9 @@ class BuildService
 
     scripting_path = "#{@build_tmp_dir}/addons/amxmodx/scripting"
     FileUtils.mkdir_p(scripting_path)
-    
-    # Copy war3ft.sma and war3ft directory
-    FileUtils.cp("war3ft/war3ft.sma", File.join(scripting_path, "war3ft.sma"))
-    FileUtils.cp_r("war3ft/war3ft", scripting_path)
+
+    FileUtils.cp("#{@src_dir}/war3ft.sma", File.join(scripting_path, "war3ft.sma"))
+    FileUtils.cp_r("#{@src_dir}/war3ft", scripting_path)
   end
 
   def copy_plugin_files
@@ -133,11 +133,11 @@ class BuildService
     FileUtils.mkdir_p(amxmodx_dir)
 
     # Copy configs
-    src = File.join(@src_dir, "configs")
+    src = File.join(@config_dir, "configs")
     FileUtils.cp_r(src, amxmodx_dir)
 
     # Copy data
-    src = File.join(@src_dir, "data")
+    src = File.join(@config_dir, "data")
     FileUtils.cp_r(src, amxmodx_dir)
   end
 
@@ -284,7 +284,7 @@ unless options[:version]
 end
 
 # Check if version matches war3ft.sma
-war3ft_version = File.readlines(File.join(__dir__, '..', 'war3ft', 'war3ft.sma'))
+war3ft_version = File.readlines(File.join(__dir__, '..', 'plugin_src', 'war3ft.sma'))
                     .find { |line| line.include?('new const WC3VERSION[]') }
                     &.match(/"([^"]+)"/)&.[](1)
 

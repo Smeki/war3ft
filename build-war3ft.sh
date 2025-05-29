@@ -12,5 +12,5 @@ tar -xzf "amxmodx-${AMXX_VERSION}-base-linux.tar.gz" > /dev/null 2>&1
 cd /opt/addons/amxmodx/scripting
 
 # Build the plugin
-./amxxpc /workspace/war3ft/war3ft.sma
+./amxxpc /workspace/plugin_src/war3ft.sma
 mv /opt/addons/amxmodx/scripting/war3ft.amxx /workspace/build_tmp/addons/amxmodx/plugins/war3ft.amxx
