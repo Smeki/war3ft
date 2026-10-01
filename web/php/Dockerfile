@@ -15,11 +15,18 @@ RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html
 
 # Apache configuration to handle .htaccess if needed
-# Disable all MPM modules except prefork
+# Fix MPM conflict by ensuring only prefork is active
 RUN a2dismod mpm_event mpm_worker mpm_async 2>/dev/null || true && \
     a2enmod mpm_prefork && \
     a2enmod rewrite && \
-    rm -f /etc/apache2/mods-available/mpm_event.* /etc/apache2/mods-available/mpm_worker.* /etc/apache2/mods-available/mpm_async.*
+    # Remove all mpm_*.load files except prefork from mods-available
+    rm -f /etc/apache2/mods-available/mpm_event.* /etc/apache2/mods-available/mpm_worker.* /etc/apache2/mods-available/mpm_async.* && \
+    # Create a startup hook to clean mods-enabled on every container start
+    echo '#!/bin/bash' > /docker-entrypoint.sh && \
+    echo 'rm -f /etc/apache2/mods-enabled/mpm_event.* /etc/apache2/mods-enabled/mpm_worker.* /etc/apache2/mods-enabled/mpm_async.* 2>/dev/null || true' >> /docker-entrypoint.sh && \
+    echo 'test -L /etc/apache2/mods-enabled/mpm_prefork.load || a2enmod mpm_prefork' >> /docker-entrypoint.sh && \
+    echo 'apache2-foreground' >> /docker-entrypoint.sh && \
+    chmod +x /docker-entrypoint.sh
 
 # Default environment variables
 ENV DB_HOST=localhost \
@@ -32,5 +39,6 @@ ENV DB_HOST=localhost \
 # Expose port 80
 EXPOSE 80
 
-# Apache runs automatically in this image, so no need for CMD
+# Use custom entrypoint to ensure MPM cleanup before Apache starts
+ENTRYPOINT ["/docker-entrypoint.sh"]
 
