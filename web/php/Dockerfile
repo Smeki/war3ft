@@ -15,7 +15,12 @@ RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html
 
 # Apache configuration to handle .htaccess if needed
-RUN a2dismod mpm_event && a2enmod mpm_prefork && a2enmod rewrite
+RUN a2dismod mpm_event && \
+    a2enmod mpm_prefork && \
+    a2enmod rewrite && \
+    rm -f /etc/apache2/mods-enabled/mpm_*.load && \
+    rm -f /etc/apache2/mods-available/mpm_event.* && \
+    echo "LoadModule mpm_prefork_module modules/mod_mpm_prefork.so" > /etc/apache2/mods-enabled/mpm_prefork.load
 
 # Default environment variables
 ENV DB_HOST=localhost \
