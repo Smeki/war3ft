@@ -15,10 +15,11 @@ RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html
 
 # Apache configuration to handle .htaccess if needed
-RUN rm -f /etc/apache2/mods-enabled/mpm_*.load /etc/apache2/mods-enabled/mpm_*.conf && \
-    find /etc/apache2/mods-available -name 'mpm_*' ! -name 'mpm_prefork.*' -delete && \
+# Disable all MPM modules except prefork
+RUN a2dismod mpm_event mpm_worker mpm_async 2>/dev/null || true && \
     a2enmod mpm_prefork && \
-    a2enmod rewrite
+    a2enmod rewrite && \
+    rm -f /etc/apache2/mods-available/mpm_event.* /etc/apache2/mods-available/mpm_worker.* /etc/apache2/mods-available/mpm_async.*
 
 # Default environment variables
 ENV DB_HOST=localhost \
@@ -31,4 +32,5 @@ ENV DB_HOST=localhost \
 # Expose port 80
 EXPOSE 80
 
-# Apache runs automatically in this image, so no need for CMD 
+# Apache runs automatically in this image, so no need for CMD
+
