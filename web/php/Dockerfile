@@ -20,12 +20,14 @@ RUN a2dismod mpm_event mpm_worker mpm_async 2>/dev/null || true && \
     a2enmod mpm_prefork && \
     a2enmod rewrite && \
     # Remove all mpm_*.load files except prefork from mods-available
-    rm -f /etc/apache2/mods-available/mpm_event.* /etc/apache2/mods-available/mpm_worker.* /etc/apache2/mods-available/mpm_async.* && \
-    # Create a startup hook to clean mods-enabled on every container start
-    echo '#!/bin/bash' > /docker-entrypoint.sh && \
+    rm -f /etc/apache2/mods-available/mpm_event.* /etc/apache2/mods-available/mpm_worker.* /etc/apache2/mods-available/mpm_async.*
+
+# Create a startup script that ensures only prefork MPM is loaded before Apache starts
+RUN echo '#!/bin/bash' > /docker-entrypoint.sh && \
+    echo 'set -e' >> /docker-entrypoint.sh && \
     echo 'rm -f /etc/apache2/mods-enabled/mpm_event.* /etc/apache2/mods-enabled/mpm_worker.* /etc/apache2/mods-enabled/mpm_async.* 2>/dev/null || true' >> /docker-entrypoint.sh && \
     echo 'test -L /etc/apache2/mods-enabled/mpm_prefork.load || a2enmod mpm_prefork' >> /docker-entrypoint.sh && \
-    echo 'apache2-foreground' >> /docker-entrypoint.sh && \
+    echo 'exec /usr/sbin/apache2-foreground' >> /docker-entrypoint.sh && \
     chmod +x /docker-entrypoint.sh
 
 # Default environment variables
