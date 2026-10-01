@@ -15,7 +15,7 @@ RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html
 
 # Apache configuration to handle .htaccess if needed
-RUN a2enmod rewrite
+RUN a2dismod mpm_event && a2enmod mpm_prefork && a2enmod rewrite
 
 # Default environment variables
 ENV DB_HOST=localhost \
