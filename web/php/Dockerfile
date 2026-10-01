@@ -27,7 +27,7 @@ RUN echo '#!/bin/bash' > /docker-entrypoint.sh && \
     echo 'set -e' >> /docker-entrypoint.sh && \
     echo 'rm -f /etc/apache2/mods-enabled/mpm_event.* /etc/apache2/mods-enabled/mpm_worker.* /etc/apache2/mods-enabled/mpm_async.* 2>/dev/null || true' >> /docker-entrypoint.sh && \
     echo 'test -L /etc/apache2/mods-enabled/mpm_prefork.load || a2enmod mpm_prefork' >> /docker-entrypoint.sh && \
-    echo 'exec /usr/sbin/apache2-foreground' >> /docker-entrypoint.sh && \
+    echo 'exec apache2-foreground' >> /docker-entrypoint.sh && \
     chmod +x /docker-entrypoint.sh
 
 # Default environment variables
