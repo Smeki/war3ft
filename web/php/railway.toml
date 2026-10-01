@@ -1,0 +1,3 @@
+[build]
+nixPackages = ["php84Extensions.pdo", "php84Extensions.pdo_mysql"]
+
