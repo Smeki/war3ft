@@ -6,11 +6,11 @@ services:
     ports:
       - "8080:80"
     environment:
-      - DB_HOST=${DB_HOST:-localhost}
-      - DB_USERNAME=${DB_USERNAME:-root}
-      - DB_PASSWORD=${DB_PASSWORD:-}
-      - DB_NAME=${DB_NAME:-amx}
-      - TIMEZONE=${TIMEZONE:-UTC}
-      - ERROR_REPORTING=${ERROR_REPORTING:-1}
+      - DB_HOST=185.180.2.24
+      - DB_USERNAME=437349_mysql_db
+      - DB_PASSWORD=437349_mysql_p4s5
+      - DB_NAME=437349_mysql_db
+      - TIMEZONE=UTC
+      - ERROR_REPORTING=1
     volumes:
       - ./src:/var/www/html

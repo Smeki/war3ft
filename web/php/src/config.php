@@ -3,16 +3,10 @@
 // Configuration using environment variables with fallback values
 
 // Database configuration
-//$host = getenv('DB_HOST') ?: 'localhost';
-//$username = getenv('DB_USERNAME') ?: 'root';
-//$pass = getenv('DB_PASSWORD') ?: '';
-//$dbname = getenv('DB_NAME') ?: 'amx';
-//$server_ip_port = getenv('SERVER_IP_PORT') ?: '127.0.0.1:27015';
-
-$host = '185.180.2.24';
-$username = '"437349_mysql_db';
-$pass = '437349_mysql_p4s5';
-$dbname = '437349_mysql_db';
+$host = getenv('DB_HOST') ?: 'localhost';
+$username = getenv('DB_USERNAME') ?: 'root';
+$pass = getenv('DB_PASSWORD') ?: '';
+$dbname = getenv('DB_NAME') ?: 'amx';
 $server_ip_port = getenv('SERVER_IP_PORT') ?: '127.0.0.1:27015';
 
 // Set error reporting based on environment
