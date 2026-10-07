@@ -30,3 +30,7 @@ ENV PORT=80 \
     ERROR_REPORTING=1
 
 EXPOSE 80
+
+# Some platforms (e.g. Railway) don't honour deletions from image layers, so
+# mpm_event (disabled by the base image) reappears. Re-enforce at startup.
+CMD ["sh", "-c", "rm -f /etc/apache2/mods-enabled/mpm_event.* /etc/apache2/mods-enabled/mpm_worker.* && exec apache2-foreground"]
